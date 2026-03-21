@@ -11,7 +11,7 @@ Za izvajanje kode na robotu se morate nanj povezati na daljavo prek SSH. Odprite
 ssh ubuntu@<ip_naslov_robota>
 ```
 
-*(Za točno uporabniško ime, geslo ter IP naslov robota preverite lokalno dokumentacijo)*
+*(Za točnen IP naslov robota preverite lokalno dokumentacijo, geslo je "ubuntu")*
 
 ## Uporaba ros2 paketa na robotu
 
@@ -26,7 +26,7 @@ Ko ste uspešno povezani z robotom, sledite naslednjim korakom za pripravo delov
 2. **Klonirajte repozitorij:**
    V poddirektorij `src`, klonirajte ta Github repozitorij:
    ```bash
-   git clone <URL_VASEGA_REPOZITORIJA> ur_robot_challenge
+   git clone git@github.com:UbiquityRobotics/ur_robot_challenge.git
    ```
 
 3. **Prevedite paket (Build):**
