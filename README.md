@@ -6,6 +6,7 @@ Trenutno vsebuje preprosto vozlišče (`drive_straight`), ki na 100ms pošilja u
 ## Povezovanje z robotom
 
 ## NAVODILA
+https://docs.google.com/document/d/12gec_yjAopAPG4-TW27NjqRAmlWTLbvkk2c-xxmtCVM/edit?tab=t.0
 
 Za izvajanje kode na robotu se morate nanj povezati na daljavo prek SSH. Odprite terminal ali Powershell in vpišite:
 
