@@ -5,6 +5,8 @@ Trenutno vsebuje preprosto vozlišče (`drive_straight`), ki na 100ms pošilja u
 
 ## Povezovanje z robotom
 
+## NAVODILA
+
 Za izvajanje kode na robotu se morate nanj povezati na daljavo prek SSH. Odprite terminal ali Powershell in vpišite:
 
 ```bash
