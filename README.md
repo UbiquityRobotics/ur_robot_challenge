@@ -3,44 +3,59 @@
 Dobrodošli na robotskem izzivu! Ta repozitorij vsebuje začetno programsko kodo za upravljanje mobilnih robotov s sistemom ROS2.
 Trenutno vsebuje preprosto vozlišče (`drive_straight`), ki na 100ms pošilja ukaze za premikanje robota naravnost naprej.
 
+## Viri in dokumentacija
+
+Preden začnete, si obvezno preberite podrobna navodila izziva:
+*  **[Glavna navodila izziva (Google Doc)](https://docs.google.com/document/d/12gec_yjAopAPG4-TW27NjqRAmlWTLbvkk2c-xxmtCVM/edit?tab=t.0)**
+*  **Ubiquity Robotics dokumentacija:** [learn2.ubiquityrobotics.com](https://learn2.ubiquityrobotics.com/jazzy/)
+*  **ROS2 dokumentacija:** [docs.ros.org](https://docs.ros.org)
+
 ## Povezovanje z robotom
-
-## NAVODILA
-https://docs.google.com/document/d/12gec_yjAopAPG4-TW27NjqRAmlWTLbvkk2c-xxmtCVM/edit?tab=t.0
-
-Za izvajanje kode na robotu se morate nanj povezati na daljavo prek SSH. Odprite terminal ali Powershell in vpišite:
+Za izvajanje kode na robotu se morate nanj povezati prek SSH. Odprite terminal ali Powershell in vpišite:
 
 ```bash
 ssh ubuntu@<ip_naslov_robota>
 ```
 
-*(Za točnen IP naslov robota preverite lokalno dokumentacijo, geslo je "ubuntu")*
+*(Za točen IP naslov robota preverite tablo, privzeto geslo je "ubuntu")*
 
-## Uporaba ros2 paketa na robotu
+## Ročno krmiljenje (Teleop)
 
-Ko ste uspešno povezani z robotom, sledite naslednjim korakom za pripravo delovnega okolja:
+Ko se na robota povežete in še preden se začnete ukvarjati z avtonomno kodo, preverite, ali je robot sploh *živ*. Za ročno upravljanje robota prek tipkovnice uporabite:
+
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+*Navodila za upravljanje se izpišejo v terminalu (vozimo s tipkami `u`, `i`, `o`, `j`, `k`, `l`, `m`, `,`, `.`).*
+
+
+## Uporaba ROS2 paketa na robotu
+
+Ko ste uspešno povezani z robotom in ga lahko upravljate s tipkovnico, sledite naslednjim korakom za pripravo delovnega okolja:
 
 1. **Pojdite v delovni prostor ROS2 (ROS2 workspace):**
-   Običajno se delovni prostor nahaja v `~/ros2_challenge_ws`. Če še ne obstaja, ga prosim ustvarite (ta mapa običajno na robotih že obstaja, vseeno preverite preden ustvarjate nove poti):
+   Delovni prostor se običajno nahaja v `~/ros2_challenge_ws`. Če še ne obstaja, ga prosim ustvarite:
    ```bash
-   ~/ros2_challenge_ws
+   cd ~/ros2_challenge_ws
    ```
 
 2. **Klonirajte repozitorij:**
-   V poddirektorij `src`, klonirajte ta Github repozitorij:
+   V poddirektorij `src` klonirajte ta Github repozitorij:
    ```bash
-   git clone git@github.com:UbiquityRobotics/ur_robot_challenge.git
+   cd src
+   git clone https://github.com/UbiquityRobotics/ur_robot_challenge.git
    ```
 
 3. **Prevedite paket (Build):**
-   Premaknite se nazaj v koren delovnega prostora in zaženite prevajanje paketa z uporabo `colcon`:
+   Premaknite se nazaj v koren delovnega prostora in zaženite gradnjo paketa z uporabo `colcon`:
    ```bash
-   ~/ros2_challenge_ws 
+   cd ~/ros2_challenge_ws 
    colcon build --packages-select ur_robot_challenge
    ```
 
-4. **Naložite nastavitve delovnega okolja:**
-   Da bo sistem ROS2 prepoznal vaš na novo preveden paket, morate vedno posodobiti okolje:
+4. **Naložite okolje:**
+   Da bo sistem ROS2 prepoznal vaš na novo preveden paket, morate vedno "sourcati" okolje:
    ```bash
    source install/setup.bash
    ```
@@ -57,4 +72,16 @@ Robot bi se moral začeti premikati naravnost takoj po izvedbi zgornjega ukaza. 
 
 ## Struktura paketa
 
-* `ur_robot_challenge/drive_straight.py`: Python izvorna koda vozlišča. Naroča in objavlja `Twist` sporočila na temodelu `/cmd_vel`.
+* `ur_robot_challenge/drive_straight.py`: Python izvorna koda vozlišča. Naroča se in objavlja `Twist` sporočila na temi `/cmd_vel`.
+* `package.xml` & `setup.py`: Konfiguracijske datoteke ROS2 paketa.
+
+
+## Preverjanje kamere (za 3. in 4. podiziv)
+
+Za zahtevnejše dele izziva boste potrebovali dostop do kamere. Da preverite, pod katero temo (topic) robot oddaja sliko, uporabite ukaz:
+
+```bash
+ros2 topic list | grep camera
+```
+
+V vašem programu se boste morali naročiti (subscribe) na to temo (običajno `/camera/image_raw` ali podobno), da bo robot lahko "videl" okolico in zaznaval osebe.
