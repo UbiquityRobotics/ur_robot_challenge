@@ -85,3 +85,7 @@ ros2 topic list | grep camera
 ```
 
 V vašem programu se boste morali naročiti (subscribe) na to temo (običajno `/camera/image_raw` ali podobno), da bo robot lahko "videl" okolico in zaznaval osebe.
+
+
+## Zbiranje kontaktov
+https://docs.google.com/spreadsheets/d/11Yql-WHlgOm_MWSEGSYsWk3eWW7LL6nkI3fkzvLiVcQ/edit?gid=607078201#gid=607078201
